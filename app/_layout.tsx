@@ -1,8 +1,10 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 //import { useColorScheme } from 'react-native';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useRouter } from 'expo-router';
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -44,13 +46,26 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
  // const colorScheme = useColorScheme();
+ const router=useRouter();
 
   return (
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen 
-        name ="(modals)/loading"
-        options={{ presentation: 'modal', }}
+        name ="(modals)/login"
+        options={{ 
+          title:'Log in or sign up',
+          headerTitleStyle: {
+            fontFamily:'mon–sb',
+          },
+          presentation: 'modal',
+          headerLeft:()=>(
+
+            <TouchableOpacity onPress={()=>router.back()} >
+               <Ionicons name="close-outline" size={24} color="black" />
+            </TouchableOpacity>
+          )
+        }}
         />
       </Stack>
   );
